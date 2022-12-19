@@ -1,0 +1,41 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.MainBtn {
+  background-color: #3D61B0;
+}
+
+.MainBtn:hover {
+  background-color: #2F4B87;
+}
+
+a, a:visited {
+  color: rgb(54, 123, 207);
+  width: 100%;
+  text-decoration: none;
+}
+
+/* html,
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: white;
+  }
+} */
