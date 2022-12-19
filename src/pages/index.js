@@ -17,14 +17,14 @@ import { enterpriseInitialState } from "../store/initialState";
 const IndexPage = () => {
   const { account, active } = useWeb3React();
 
-  const [enterprises, setEnterprises, updateEnterprises] = store.useState(
+  const [enterprises, , updateEnterprises] = store.useState(
     STORE_KEYS.id.enterprises
   );
   const [, setStep] = store.useState(STORE_KEYS.id.step);
   const joinState = enterprises.joined;
 
   useEffect(() => {
-    setEnterprises((prev) => {
+    updateEnterprises((prev) => {
       prev.tempEnterprise.info = enterpriseInitialState.tempEnterprise.info;
       prev.tempEnterprise.shareholders =
         enterpriseInitialState.tempEnterprise.shareholders;
@@ -33,7 +33,7 @@ const IndexPage = () => {
     });
 
     setStep(STEP.INDEX);
-  }, [setStep, setEnterprises]);
+  }, [setStep, updateEnterprises]);
 
   useEffect(() => {
     console.log(account, active);
@@ -50,10 +50,12 @@ const IndexPage = () => {
       <Header pageTitle="Home" />
       {!account && <Landing />}
       {account &&
-        enterprises.filter((enterprise) => enterprise.mine).length === 0 &&
+        enterprises.enterprises.filter((enterprise) => enterprise.mine)
+          .length === 0 &&
         !joinState && <DashBoard1 />}
       {account &&
-        (enterprises.filter((enterprise) => enterprise.mine).length !== 0 ||
+        (enterprises.enterprises.filter((enterprise) => enterprise.mine)
+          .length !== 0 ||
           joinState) && <DashBoard2 />}
     </Fragment>
   );

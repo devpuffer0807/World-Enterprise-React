@@ -15,7 +15,7 @@ import { useState } from "react";
 const HomeAppBar = () => {
   const { account, deactivate } = useWeb3React();
 
-  const [anchorEl, setAnchorEl] = (useState < null) | (HTMLElement > null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);

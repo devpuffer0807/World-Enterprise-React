@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Add, ArrowForwardIos, Person, Search } from "@mui/icons-material";
 import {
   Autocomplete,
-  AutocompleteRenderInputParams,
   Avatar,
   Button,
   Container,
@@ -52,9 +51,9 @@ const DashBoard2 = () => {
 
   const onClickItem = (idx) => () => {
     console.log(idx);
-    console.log(enterprises);
-    if (enterprises[idx]) {
-      if (!enterprises[idx].mine) {
+    console.log(enterprises.enterprises);
+    if (enterprises.enterprises[idx]) {
+      if (!enterprises.enterprises[idx].mine) {
         setIdx(idx);
         setDlgOpened(true);
       } else {
@@ -64,7 +63,7 @@ const DashBoard2 = () => {
   };
 
   const requestHandler = (idx) => () => {
-    const enterprise = enterprises[idx];
+    const enterprise = enterprises.enterprises[idx];
     console.log(enterprise);
     const joinProposal = {
       id: Date.now(),
@@ -194,10 +193,10 @@ const DashBoard2 = () => {
           freeSolo
           id="search"
           disableClearable
-          options={enterprises
+          options={enterprises.enterprises
             .filter((enterprise) => !isMine || (isMine && enterprise.mine))
             .map((enterprise) => enterprise.info.name)}
-          renderInput={(params: AutocompleteRenderInputParams) => (
+          renderInput={(params) => (
             <TextField
               {...params}
               InputProps={{
@@ -296,7 +295,7 @@ const DashBoard2 = () => {
       >
         <List dense={true} sx={{ width: "100%", pt: 2, px: 0 }}>
           <Divider />
-          {enterprises.map((enterprise, idx) => {
+          {enterprises.enterprises.map((enterprise, idx) => {
             console.log(
               enterprise.info.name
                 .toLowerCase()
@@ -322,13 +321,13 @@ const DashBoard2 = () => {
           })}
         </List>
       </Grid>
-      {enterprises[idx] && (
+      {enterprises.enterprises[idx] && (
         <JoinModal
           open={dlgOpened}
           onClose={() => {
             setDlgOpened(false);
           }}
-          name={enterprises[idx].info.name}
+          name={enterprises.enterprises[idx].info.name}
           shareToBuy={150}
           offerPrice={0}
           request={requestHandler(idx)}
@@ -338,17 +337,7 @@ const DashBoard2 = () => {
   );
 };
 
-export const Item = ({
-  avatar,
-  title,
-  content,
-  onClick,
-}: {
-  avatar: string,
-  title: string,
-  content: string,
-  onClick: Function,
-}) => {
+export const Item = ({ avatar, title, content, onClick }) => {
   return (
     <>
       <ListItemButton
